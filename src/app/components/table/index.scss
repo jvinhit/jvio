@@ -78,6 +78,10 @@ $row-bg: #f4f2f1;
     }
 }
 
+.order-header {
+    padding: 10px 10px 0;
+}
+
 @media all and (max-width: 767px) {
     .flex-row {
         width: calc(100% / 3); //1px = border right
@@ -103,7 +107,7 @@ $row-bg: #f4f2f1;
         }
     }
 
-    .header {
+    .table-header {
         .flex-row {
             border-bottom: solid 1px;
         }

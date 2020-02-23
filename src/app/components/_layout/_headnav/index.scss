@@ -30,6 +30,10 @@ $page-width: 930px;
             line-height: 40px;
             margin: 0 30px 0;
 
+            @media all and (max-width: 968px) {
+                margin: 0 10px 0;
+            }
+
             &:hover {
                 border-bottom: 2px solid #ffffff;
                 transition: ease-in 0.2s;

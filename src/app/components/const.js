@@ -1,6 +1,7 @@
-export const Constants = {
+const Constants = {
     Order: {
-        title: 'List of Order',
-        summary: 'Order infomation & payment',
+        title: name => `List of ${name}`,
+        summary: name => `${name} infomation & payment`,
     },
 };
+export default Constants;

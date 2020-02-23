@@ -1,18 +1,15 @@
 import React, { lazy } from 'react';
 import LazyLoad from '../components/_lazy';
 
-const HomeDefaultCpm = lazy(() => import('../containers/home'));
 const OrderCpm = lazy(() => import('../containers/order'));
-
 const LazyOrderCpm = props => <LazyLoad component={OrderCpm} {...props} />;
-const LazyHomeDefaultCpm = props => <LazyLoad component={HomeDefaultCpm} {...props} />;
 
 const routerConfig = {
     home: {
         key: 'key_home',
         name: 'Home',
         path: '/',
-        component: LazyHomeDefaultCpm,
+        component: LazyOrderCpm,
         auth: true,
     },
     order: {
