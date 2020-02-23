@@ -1,4 +1,9 @@
 import React from 'react';
+import './index.scss';
 
-const Loading = () => <>Loading</>;
-export default React.memo(Loading);
+const Loading = React.memo(() => (
+    <div className="loading-wrapper">
+        <div className="loader" />
+    </div>
+));
+export default Loading;

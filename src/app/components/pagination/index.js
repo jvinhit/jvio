@@ -16,19 +16,14 @@ const range = (from, to, step = 1) => {
 const LEFT_PAGE = 'left_page';
 const RIGHT_PAGE = 'right_page';
 
-const Pagination = React.memo(props => {
-    const { initialPage, totalItems, itemsPerPage, handlePageChange, pageNeighbours = 1 } = props;
+const Pagination = props => {
+    const { initialPage, totalItem, itemsPerPage, handlePageChange, pageNeighbours = 1 } = props;
     const [currentPage, setCurrentPage] = useState(initialPage);
     const [pageRange, setPageRange] = useState([]);
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const totalPages = Math.ceil(totalItem / itemsPerPage);
     // (1) < {4 5} [6] {7 8} > (10)
     const totalNumbers = pageNeighbours * 2 + 3; // () + {} * 2 + ()
     const totalBlocks = totalNumbers + 2;
-
-    const changePageRange = direction => {
-        setCurrentPage(direction === RIGHT_PAGE ? currentPage + 1 : currentPage - 1);
-    };
-
     const fetchPageNumbers = () => {
         if (totalPages > totalBlocks) {
             let pages = [];
@@ -74,48 +69,60 @@ const Pagination = React.memo(props => {
 
     useEffect(() => {
         setPageRange(fetchPageNumbers());
-    }, []);
-
+    }, [totalItem]);
+    const goFirst = () => {
+        if (pageRange.length) {
+            setCurrentPage(1);
+        }
+    };
+    const goLast = () => {
+        if (pageRange.length) {
+            setCurrentPage(pageRange[pageRange.length - 1]);
+        }
+    };
     return (
-        <div className="pagination">
-            <button className="paginationNav" onClick={() => changePageRange(LEFT_PAGE)} disabled={currentPage === 1}>
-                {'<'}
-            </button>
-
+        <div className="pagination-wrapper">
+            <div className="page-count">You have {totalItem} order</div>
             <div className="pagination">
-                {pageRange.map((page, index) => {
-                    if (page === LEFT_PAGE) {
-                        return (
-                            <span key={index} className="pX-10">
-                                ....
-                            </span>
-                        );
-                    }
-                    if (page === RIGHT_PAGE) {
-                        return (
-                            <span key={index} className="pX-10">
-                                ....
-                            </span>
-                        );
-                    }
-                    return (
-                        <div key={index} className={`paginationNumber ${currentPage === page ? 'paginationNumber--active' : ''}`} onClick={() => setCurrentPage(page)}>
-                            {page}
-                        </div>
-                    );
-                })}
-            </div>
+                <button className="paginationNav" onClick={() => goFirst()} disabled={currentPage === 1}>
+                    First
+                </button>
 
-            <button className="paginationNav" onClick={() => changePageRange(RIGHT_PAGE)} disabled={currentPage === totalPages}>
-                {'<'}
-            </button>
+                <div className="pagination">
+                    {pageRange.map((page, index) => {
+                        if (page === LEFT_PAGE) {
+                            return (
+                                <span key={index} className="pX-10">
+                                    ....
+                                </span>
+                            );
+                        }
+                        if (page === RIGHT_PAGE) {
+                            return (
+                                <span key={index} className="pX-10">
+                                    ....
+                                </span>
+                            );
+                        }
+                        return (
+                            <div key={index} className={`paginationNumber ${currentPage === page ? 'paginationNumber--active' : ''}`} onClick={() => setCurrentPage(page)}>
+                                {page}
+                            </div>
+                        );
+                    })}
+                </div>
+
+                <button className="paginationNav" onClick={() => goLast()} disabled={currentPage === totalPages}>
+                    Last
+                </button>
+            </div>
         </div>
     );
-});
+};
 
 Pagination.propTypes = {
     initialPage: PropTypes.number,
-    totalItems: PropTypes.number,
+    totalItem: PropTypes.number,
     itemsPerPage: PropTypes.number,
     handlePageChange: PropTypes.func,
     pageNeighbours: PropTypes.number,

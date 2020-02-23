@@ -10,3 +10,13 @@ export const Columns = [
     { name: 'order_id', label: 'Order ID' },
     { name: 'total_amount', label: 'Total' },
 ];
+export const FilterList = [
+    { key: 'confirm', label: 'Confirm' },
+    { key: 'process', label: 'Process' },
+    { key: 'waiting', label: 'Waiting' },
+    { key: 'payment', label: 'Payment' },
+    { key: 'success', label: 'Success' },
+];
+export const Label = {
+    count_filter: count => `You have ${count} orders, waiting for your confirm!`,
+};

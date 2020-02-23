@@ -3,44 +3,45 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrderList } from './action';
-import { Columns } from './const';
+import { Columns, Label } from './const';
 import Table from '../../components/table';
 import Pagination from '../../components/pagination';
 import Breadcrumb from '../../components/breadcrumb';
+import FilterNav from './filternav';
+import Loading from '../../components/_loading';
 
 const Order = React.memo(props => {
-    const { getOrderList, orderList } = props;
+    const { getOrderList, orderList, totalItem, isLoading } = props;
     const [currentPage, setCurrentPage] = useState(1);
+    const [filterStatus, setFilterStatus] = useState('');
 
-    // first load data
+    // load data, paging and filter query change
     useEffect(() => {
-        console.log('currentPage: ', currentPage);
-        getOrderList({ page: currentPage, pageSize: 10 });
-    }, [currentPage]);
+        getOrderList({ page: currentPage, pageSize: 10, status: filterStatus });
+    }, [currentPage, filterStatus]);
 
     // event page change
     const onPageChange = pageIndex => {
-        console.log(pageIndex);
         setCurrentPage(pageIndex);
+    };
+    const selectStatus = status => {
+        if (filterStatus === status) {
+            setFilterStatus('');
+            return;
+        }
+        setFilterStatus(status);
     };
 
     return (
         <>
+            {isLoading && <Loading />}
             <Breadcrumb />
-            <nav className="nav-left">
-                <ul className="nav-top__list">
-                    <li className="nav-top__item">
-                        <span className="nav-top__item__link" href="home">
-                            Process
-                        </span>
-                    </li>
-                </ul>
-            </nav>
+            <FilterNav filterStatus={filterStatus} onSelect={selectStatus} />
             <article className="main-wrapper">
                 <div className="main-content">
-                    <div className="order-header">You have 101 orders, waiting for your confirm!</div>
+                    {filterStatus && <div className="order-header">{Label.count_filter(totalItem)}</div>}
                     <Table columns={Columns} datasource={orderList} />
-                    <Pagination initialPage={currentPage} totalItems={100} itemsPerPage={10} handlePageChange={onPageChange} />
+                    {totalItem && <Pagination initialPage={currentPage} totalItem={totalItem} itemsPerPage={10} handlePageChange={onPageChange} />}
                 </div>
             </article>
         </>
@@ -49,15 +50,18 @@ const Order = React.memo(props => {
 Order.propTypes = {
     getOrderList: PropTypes.func,
     orderList: PropTypes.array,
+    totalItem: PropTypes.number,
+    isLoading: PropTypes.bool,
 };
 const mapStateToProps = state => {
     const {
-        orderReducer: { orderList, isLoading, err },
+        orderReducer: { orderList, isLoading, err, totalItem },
     } = state;
     return {
         orderList,
         isLoading,
         err,
+        totalItem,
     };
 };
 const mapDispatchToProps = {

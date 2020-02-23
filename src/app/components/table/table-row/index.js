@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const TableRow = ({ row, columns }) => (
+const TableRow = React.memo(({ row, columns }) => (
     <div className="flex-table row" role="rowgroup">
         {columns.map((col, index) => (
             <div key={index} className="flex-row" role="cell">
@@ -8,6 +9,9 @@ const TableRow = ({ row, columns }) => (
             </div>
         ))}
     </div>
-);
-
+));
+TableRow.propTypes = {
+    row: PropTypes.object,
+    columns: PropTypes.array,
+};
 export default TableRow;

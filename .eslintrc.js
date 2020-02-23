@@ -21,6 +21,7 @@ module.exports = {
         'implicit-arrow-linebreak': 'off',
         'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
         'no-console': [1],
+        'object-curly-newline': 'off',
         indent: [
             'error',
             4,

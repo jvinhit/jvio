@@ -1,0 +1,40 @@
+.filter-nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 200px;
+    background: #ccc;
+    z-index: 101;
+    height: 100%;
+    position: fixed;
+    color: #000000;
+    padding-top: 1em;
+
+    .filter-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        .filter-item {
+            padding: 8px 20px;
+
+            &:hover {
+                background-color: #131313;
+                color: #ffffff;
+                cursor: pointer;
+            }
+
+            &.active {
+                background-color: #131313;
+                color: #ffffff;
+            }
+
+            .filter-label {
+                text-transform: uppercase;
+                font-weight: 500;
+                display: block;
+            }
+        }
+    }
+}

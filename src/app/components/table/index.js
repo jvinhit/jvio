@@ -1,26 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import TableHeader from './table-header';
 import TableRow from './table-row';
 import './index.scss';
 
-const Table = React.memo(({ datasource, columns, ...resp }) => {
-    console.log(datasource);
+const Table = React.memo(({ datasource, columns }) => {
     return (
         <div className="table-container" role="table" aria-label="Destinations">
             <TableHeader columns={columns} />
             {datasource.map((item, index) => (
                 <TableRow key={index} row={item} columns={columns} />
             ))}
-            {/* <div className="flex-table row" role="rowgroup">
-                <div className="flex-row" role="cell">
-                    Canada
-                </div>
-                <div className="flex-row" role="cell">
-                    Vancouver to Victoria and Butchart Gardens Tour{' '}
-                </div>
-            </div> */}
         </div>
     );
 });
-
+Table.propTypes = {
+    datasource: PropTypes.array,
+    columns: PropTypes.array,
+};
 export default Table;
