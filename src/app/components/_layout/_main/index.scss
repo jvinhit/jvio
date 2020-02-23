@@ -1,0 +1,31 @@
+@import '../../../../assets/styes/base';
+
+section {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    top: 170px;
+    min-height: calc(100% - #{$head_top} - #{$footer} - #{$header});
+    overflow: auto;
+
+    .nav-left {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        float: left;
+        width: 200px;
+        background: #ccc;
+        padding: 20px;
+        z-index: 101;
+        height: 100%;
+        position: fixed;
+    }
+
+    .main-content {
+        margin-left: 200px;
+        margin-bottom: 60px;
+        overflow: auto;
+        position: relative;
+        min-height: 100%;
+    }
+}

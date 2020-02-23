@@ -1,0 +1,11 @@
+.breadcrumb {
+    padding: 10px 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px -6px #222;
+
+    &:hover {
+        cursor: pointer;
+        color: rgb(10, 18, 141);
+        transition: all 0.2s ease-in-out;
+    }
+}

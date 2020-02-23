@@ -1,0 +1,64 @@
+$page-width: 930px;
+
+.nav-top {
+    background-color: #1f1f1f;
+    color: white;
+    position: fixed;
+    top: 0;
+    z-index: 101;
+    width: 100%;
+    height: 80px;
+    font-size: 18px;
+
+    &__list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    &__item {
+        float: left;
+
+        &__link {
+            display: block;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 20px 0px 0;
+            line-height: 40px;
+            margin: 0 30px 0;
+
+            &:hover {
+                border-bottom: 2px solid #ffffff;
+                transition: ease-in 0.2s;
+            }
+        }
+
+        .logo {
+            --g: var(--c, transparent) calc(49.5% - 3px), #fff calc(49.5% - 2px), #000 49.5%, transparent 50%;
+            background: linear-gradient(to top right, var(--g)) top right, linear-gradient(to top left, var(--g)) top left, linear-gradient(to bottom right, var(--g)) bottom right,
+                linear-gradient(to bottom left, var(--g)) bottom left;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+            width: 140px;
+            height: 70px;
+            display: inline-block;
+            margin: 5px;
+
+            .text {
+                text-align: center;
+                line-height: 70px;
+                font-weight: bold;
+                display: block;
+
+                &.center {
+                }
+            }
+        }
+    }
+
+    &.align-logo {
+    }
+}
