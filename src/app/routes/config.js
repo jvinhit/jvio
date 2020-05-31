@@ -2,8 +2,10 @@ import React, { lazy } from 'react';
 import LazyLoad from '../components/_lazy';
 
 const OrderCpm = lazy(() => import('../containers/order'));
-const LazyOrderCpm = props => <LazyLoad component={OrderCpm} {...props} />;
+const Example = lazy(() => import('../containers/example'));
 
+const LazyOrderCpm = props => <LazyLoad component={OrderCpm} {...props} />;
+const LazyExample = props => <LazyLoad component={Example} {...props} />;
 const routerConfig = {
     home: {
         key: 'key_home',
@@ -44,7 +46,7 @@ const routerConfig = {
         key: 'key_notification',
         name: 'Notification',
         path: '/notification',
-        component: LazyOrderCpm,
+        component: LazyExample,
         auth: true,
     },
 };
